@@ -57,6 +57,10 @@ nav img{
     width: 100%;
 }
 .text-box{
+    box-sizing: border-box;
+    background-color: rgb(109, 206, 252);
+    padding: 30px;
+    border-radius: 20px;
     width: 90%;
     color: #000000;
     position: absolute;
@@ -64,6 +68,20 @@ nav img{
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+}
+.text-box h1{
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 60px;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+.text-box p{
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
 }
 
 /*----------------PORTFOLIO--------------*/
