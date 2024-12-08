@@ -1,4 +1,4 @@
-#CPE212 - FInal Project
+# CPE212 - FInal Project
 ### CPE212_GROUP1_FINALPROJECT
 
 Members:                     Roles:
