@@ -1,0 +1,53 @@
+---
+- name: Deploy and run Docker container on remote servers
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: Ensure Docker is installed (Ubuntu)
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Ensure Docker is installed (CentOS)
+      yum:
+        name: docker
+        state: present
+      when: ansible_distribution == "CentOS"
+
+    - name: Start Docker service (Ubuntu)
+      service:
+        name: docker
+        state: started
+        enabled: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Start Docker service (CentOS)
+      service:
+        name: docker
+        state: started
+        enabled: yes
+      when: ansible_distribution == "CentOS"
+
+    - name: Check if image is present on the target server
+      community.docker.docker_image_info:
+        name: buduman/group1final:1.0
+      register: docker_image_check
+      ignore_errors: yes
+
+    - name: Pull Docker image
+      community.docker.docker_image:
+        name: buduman/group1final:1.0
+        source: pull
+      when: docker_image_check.failed
+
+    - name: Deploy Docker container from pulled image
+      docker_container:
+        name: webapp_container
+        image: buduman/group1final:1.0
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "9091:80"
