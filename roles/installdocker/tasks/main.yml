@@ -1,0 +1,78 @@
+---
+- name: Install Python3 and pip3 on Ubuntu
+  tags: python3, ubuntu
+  apt:
+    name:
+      - python3
+      - python3-pip
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Python3 and pip3 on CentOS
+  tags: python3, centOS
+  yum:
+    name:
+      - python3
+      - python3-pip
+    state: latest
+  when: ansible_distribution == "CentOS"
+
+- name: Install yum utils (CentOS)
+  tags: yum_utils, centOS
+  yum:
+    name: yum-utils
+    state: latest
+  when: ansible_distribution == "CentOS"
+
+- name: Add Docker Yum Repository (CentOS)
+  tags: docker, centOS
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+  become: yes
+  when: ansible_distribution == "CentOS"
+
+- name: Install docker (CentOS)
+  tags: docker, centOS
+  yum:
+    name: docker-ce
+    state: latest
+  when: ansible_distribution == "CentOS"
+
+- name: Ensure Docker is installed (Ubuntu)
+  tags: docker, ubuntu
+  apt:
+    name: docker.io
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Start Docker service
+  tags: docker, centOS, Ubuntu
+  service:
+     name: docker
+     state: started
+     enabled: yes
+
+- name: Add docker group to current user
+  tags: docker, centOS, ubuntu
+  group:
+    name: docker
+    state: present
+
+- name: Add user to docker group
+  tags: docker, centOS, ubuntu
+  user:
+    name: "{{ansible_user}}"
+    groups: docker
+    append: yes
+
+- name: change permission of docker.sock
+  tags: docker, centOS, ubuntu
+  file:
+    path: /var/run/docker.sock
+    state: file
+    owner: root
+    group: docker
+    mode: "666"

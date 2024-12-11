@@ -1,0 +1,9 @@
+---
+- name: Deploy Docker container from pulled image
+  docker_container:
+    name: webapp_container
+    image: buduman/group1final:1.1
+    state: started
+    restart_policy: unless-stopped
+    published_ports:
+      - "9091:80"

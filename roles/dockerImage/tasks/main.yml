@@ -1,0 +1,14 @@
+---
+- name: Check if image is present on the target server
+  tags: docker, dockerImage, ubuntu, centOS
+  community.docker.docker_image_info:
+    name: buduman/group1final:1.1
+  register: docker_image_check
+  ignore_errors: yes
+
+- name: Pull Docker image if not present
+  tags: docker, dockerImage, ubuntu, centOS
+  community.docker.docker_image:
+    name: buduman/group1final:1.1
+    state: latest
+  when: docker_image_check.failed

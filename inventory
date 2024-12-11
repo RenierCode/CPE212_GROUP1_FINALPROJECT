@@ -1,0 +1,6 @@
+[ubuntu_server]
+server1       ansible_user=rnrlope
+
+[centOS_server]
+centOS        ansible_user=rnrlope
+ 
