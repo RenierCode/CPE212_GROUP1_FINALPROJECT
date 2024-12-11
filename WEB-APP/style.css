@@ -93,7 +93,7 @@ nav img{
     background-image: linear-gradient(rgb(252, 45, 45), rgb(137, 192, 243));
 }
 .portfolio{
-    width: 100%;
+    width: 80%;
     margin: auto;
     text-align: center;
     padding-top: 30px;
@@ -107,6 +107,8 @@ nav img{
     line-height: 22px;
 }
 .portfolio-column{
+    height: 350px;
+    width: 350px;
     flex-basis: 32%;
     border-radius: 10px;
     margin-bottom: 30px;
@@ -157,6 +159,7 @@ nav img{
     padding: 16px;
     display: grid;
     justify-content: center;
+    justify-items: center;
     margin-top: 20px;
     margin-left: 50px;
     margin-right: 50px;
@@ -241,6 +244,26 @@ nav img{
     1px -1px 0 #ffffff,
     -1px 1px 0 #ffffff,
     1px 1px 0 #ffffff; 
+    margin-bottom: 10px;
+}
+.learnings{
+    font-family: "Noto Sans", sans-serif;
+    font-size: 20px;
+    font-style: bold;
+    color: #000000;
+    text-align: center;
+    margin-left: 20px;
+    margin-left: 20px;
+    margin-bottom: 100px;
+    text-shadow:
+    -1px -1px 0 #ffffff,
+    1px -1px 0 #ffffff,
+    -1px 1px 0 #ffffff,
+    1px 1px 0 #ffffff; 
+    margin-bottom: 10px;
+    background-color: #ffffff;
+}
+.learnings p{
     margin-bottom: 10px;
 }
 .act-name{
